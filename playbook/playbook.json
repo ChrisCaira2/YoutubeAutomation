@@ -1,0 +1,313 @@
+{
+  "version": 3,
+  "as_of": "2026-11-02",
+  "notes": "Seed Playbook. 'high' = checked against YouTube's own help pages; 'medium'/'low' = creator-industry blogs, treated as hypotheses until our analytics confirm or overrule them. 'our_data' is filled by the Analytics Agent.",
+  "entries": [
+    {
+      "id": "policy-inauthentic",
+      "area": "policy",
+      "rule": "Channels with too much generic, repetitive or template-based content lose monetization; 'image slideshows or scrolling text with little value' and mass-produced AI content without the creator's own perspective are named as ineligible. Distinct storylines in a shared format are fine.",
+      "source": "YouTube Help: YPP policies",
+      "url": "https://support.google.com/youtube/answer/1311392",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "policy-clarification-2026",
+      "area": "policy",
+      "rule": "Clarified 2026-07-16 into three non-monetizable buckets: template-based mass production, distressing/manipulative content, and AI personas of real people on finance, legal or health topics. Judged across the whole channel.",
+      "source": "TechCrunch, 2026-07-20",
+      "url": "https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "policy-disclosure",
+      "area": "policy",
+      "rule": "Disclose AI content that seems realistic: a real person saying or doing something they didn't, altered real events or places, a realistic scene that didn't happen, or AI music as the main focus. Non-realistic or fully animated content, captions and AI-assisted scripts/titles/thumbnails need no disclosure.",
+      "source": "YouTube Help: altered or synthetic content",
+      "url": "https://support.google.com/youtube/answer/14328491",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "spec-shorts",
+      "area": "shorts",
+      "rule": "Shorts are square or vertical videos up to 3 minutes. A 16:9 video stays long-form.",
+      "source": "YouTube Help: Shorts length",
+      "url": "https://support.google.com/youtube/answer/15424877",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "spec-thumbnail",
+      "area": "packaging",
+      "rule": "Thumbnails: JPG or PNG, 16:9, minimum 640 px wide, up to 50 MB from desktop (2 MB from mobile). Export at 1280x720 or larger.",
+      "source": "YouTube Help: custom thumbnails",
+      "url": "https://support.google.com/youtube/answer/72431",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "packaging-test-compare",
+      "area": "packaging",
+      "rule": "Test & Compare runs up to 3 titles and/or thumbnails, picks the winner by watch-time share (not clicks), desktop Studio only, not for Shorts. If any thumbnail is below 1280x720, all are downscaled to 480p. Changing title/thumbnail mid-test stops it.",
+      "source": "YouTube Help: Test & Compare",
+      "url": "https://support.google.com/youtube/answer/13861714",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "packaging-three-angles",
+      "area": "packaging",
+      "rule": "Make three packages that differ in promise or emotion (curiosity, myth-bust, story), not three wordings of one idea.",
+      "source": "vidIQ, RouteNote (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "packaging-mobile",
+      "area": "packaging",
+      "rule": "Design for a ~160 px wide mobile thumbnail: one focal subject, one emotion, 3-4 words max, high contrast.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "packaging-match",
+      "area": "packaging",
+      "rule": "Title, thumbnail, hook and content must make the same promise; bait-and-switch hurts satisfaction signals.",
+      "source": "AIR Media-Tech, Outlier Kit (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "algo-satisfaction",
+      "area": "algorithm",
+      "rule": "Viewer satisfaction (surveys, likes, shares, returning viewers) outweighs raw watch time. Never pad length.",
+      "source": "AIR Media-Tech, SocialPilot (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "algo-separate-systems",
+      "area": "algorithm",
+      "rule": "Shorts and long-form are recommended separately; a weak Short does not drag down long-form. Reported healthy mix is 25-40% Shorts by upload count.",
+      "source": "Outlier Kit (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "long-hook",
+      "area": "long-form",
+      "rule": "Hook 0:00-0:30 with no greeting: ~10 s proof of the title, ~10 s why it matters, ~10 s roadmap. First payoff before 0:30.",
+      "source": "Outlier Kit, TubeMilestone (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "long-hook-types",
+      "area": "long-form",
+      "rule": "Rotate hook types: counterintuitive claim, story teaser, surprising stat, myth-bust, value promise, open question. For this niche, myth-bust ('You've heard X. The record says Y.') is the default to test first.",
+      "source": "Creator blogs (via brief) + channel strategy",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "long-interrupts",
+      "area": "long-form",
+      "rule": "Long-form: cut to a new still about every 6-12 s, holding long enough to read the analysis. Bigger reset (new chart type, chapter card) every 30-60 s; chapter reset every 2-3 min. Never zoom or pan: the channel owner's call, 2026-11-02.",
+      "source": "OverseerOS, Outlier Kit (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "long-loops",
+      "area": "long-form",
+      "rule": "1-3 open loops per video; close small ones fast, keep one alive to the climax.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "long-rehook",
+      "area": "long-form",
+      "rule": "Re-hook near 3:00 and open each block with a question it answers. Put a strong payoff mid-video, not only at the end.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "long-ending",
+      "area": "long-form",
+      "rule": "End with a specific bridge to a related episode, not a generic subscribe plea.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "shorts-swipe",
+      "area": "shorts",
+      "rule": "First metric is Viewed vs. Swiped Away; reportedly ~60-70% keeps distribution going, top performers 75-80%. Decided in the first 1-3 s.",
+      "source": "vidIQ, Outlier Kit (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "shorts-open",
+      "area": "shorts",
+      "rule": "Open on the payoff or the strangest frame with standalone on-screen text. No greeting, no logo.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "shorts-loop",
+      "area": "shorts",
+      "rule": "Visual change every 1-3 s; last line connects back to the first frame so it replays naturally.",
+      "source": "Creator blogs (via brief)",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "shorts-length",
+      "area": "shorts",
+      "rule": "Default 20-45 s; under ~30 s tends to complete best. Each Short is a complete standalone idea.",
+      "source": "Adobe Express length study, Quso (via brief)",
+      "url": null,
+      "confidence": "low",
+      "our_data": null
+    },
+    {
+      "id": "niche-visuals",
+      "area": "niche",
+      "rule": "Never use broadcast footage or famous radio/TV calls, and never generate likenesses of real athletes. Real people appear only in real photos listed in assets/photos/manifest.json with a recorded source and license. A credit doesn't make a photo legal; the license does, and credit is added on top. Reconstruct moments with charts and scoreboards; never draw invented player positions.",
+      "source": "Channel strategy; Library of Congress copyright blog",
+      "url": "https://blogs.loc.gov/copyright/2025/12/?gca=226",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "niche-one-moment",
+      "area": "niche",
+      "rule": "One moment per long-form video, rebuilt in depth (setup, turning point, the number that shows how unlikely it was, the aftermath). Never countdown lists of clips.",
+      "source": "Channel strategy; YPP inauthentic-content policy",
+      "url": "https://support.google.com/youtube/answer/1311392",
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "niche-thumbnail",
+      "area": "packaging",
+      "rule": "Thumbnails combine the professor, one big number or scoreline, and a faceless action silhouette. No athlete photos in thumbnails.",
+      "source": "Channel strategy",
+      "url": null,
+      "confidence": "medium",
+      "our_data": null
+    },
+    {
+      "id": "owner-stills",
+      "area": "niche",
+      "rule": "Videos must not feel like slideshows: charts build, lines and routes draw themselves, timelines and play diagrams move, and cartoon scenes play out the key moments. Any photograph stays still: no Ken Burns, zooms or pans. Slides change on hard cuts.",
+      "source": "Channel owner, 2026-11-02, updated 2026-11-04",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-natural-speech",
+      "area": "niche",
+      "rule": "Narration must sound like a person talking: connected sentences rather than clipped fragments, with pauses that vary. Years as 'nineteen sixty-two', dates as 'March second', scores as '169 to 147'. Studio rewrites numbers before the voice reads them; scripts can keep digits. A slide stays up until the voice has finished what's on it.",
+      "source": "Channel owner, 2026-11-02",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-intelligent-audience",
+      "area": "niche",
+      "rule": "Write for an intelligent audience. Never say or show arithmetic viewers can do themselves, and never put an equation on a slide ('60 home runs, 50 the year before, that's 10 more'). Offer real insight instead: why it happened, what made it possible or hard, what people missed, what it changed, what a number hides.",
+      "source": "Channel owner, 2026-11-03",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-no-repeats",
+      "area": "niche",
+      "rule": "Say each thing once. A viewer who understood it the first time must never be shown it again in slightly different words or a different format, as in a table of the batting order, then a card of the same hitters, then a slide saying who hit around whom. Every new slide and every new sentence adds something the viewer doesn't know yet; if there's nothing new, the slide stays up and the narrator moves on.",
+      "source": "Channel owner, 2026-11-04",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-whole-text",
+      "rule": "Words on screen are never cut off and never end in an ellipsis, even when the narrator goes on to say the rest. Every piece of on-screen text is a complete thought; write a shorter complete statement rather than a clipped long one.",
+      "area": "niche",
+      "source": "Channel owner, 2026-11-05",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-team-colors",
+      "rule": "Each video must look like the team at its center at a glance: a fan should recognize the colors with the sound off. Use the team's real colors at full strength, not faded versions, and no decoration unrelated to the team.",
+      "area": "niche",
+      "source": "Channel owner, 2026-11-05",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-cartoon-scenes",
+      "area": "niche",
+      "rule": "Videos are cartoons, not photo slideshows: faceless cartoon players in each team's colors act out the key moments the narrator describes, on a drawn field with a moving crowd, and charts share the same drawn style. No real photos by default. Show only what the narration says happened.",
+      "source": "Channel owner, 2026-11-07 (replaces the real-photos rule of 2026-11-05)",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-professor-intro",
+      "area": "niche",
+      "rule": "Every long-form video opens with Professor Sportington III's short welcome before anything else: he walks on, waves and introduces the channel, with the episode's title on his chalkboard. Keep it to about five seconds so the hook arrives fast.",
+      "source": "Channel owner, 2026-11-07",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-video-look",
+      "area": "niche",
+      "rule": "Every video gets its own look: slide colors follow the team or country at the center of the moment, and the heading font, background texture, chart layout and corner style change from one topic to the next. Team colors only, never team or league logos.",
+      "source": "Channel owner, 2026-11-03",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    },
+    {
+      "id": "owner-analysis-first",
+      "area": "niche",
+      "rule": "Analysis carries the slides: at least half are charts or data, about a quarter are a claim plus its evidence, and plain statements are rare. Charts show the numbers, so words add what the numbers can't.",
+      "source": "Channel owner, 2026-11-02",
+      "url": null,
+      "confidence": "high",
+      "our_data": null
+    }
+  ]
+}

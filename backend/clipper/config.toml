@@ -1,0 +1,164 @@
+# Every tunable for the GTA clipper. Paths are relative to the project folder.
+# Secrets never go here: they come from the environment or the git-ignored .env.
+
+[paths]
+database = "data/clips.db"
+media = "media/clips"
+log = "data/clips.log"
+
+[ingest]
+# 720p keeps a recorded hour near 1.5 GB: the Mac had 40 GB free on 2026-11-12.
+max_height = 720
+live_quality = "720p60,720p,best"
+# Sources are handled in pieces this long, so a live stream is transcribed while it's still going.
+segment_seconds = 300
+# How often a finished live piece is looked for, and how often the watch list is checked for streams going live.
+live_poll_seconds = 5
+watch_poll_seconds = 120
+# A watched creator only gets recorded when the stream title mentions one of these. Empty records anything.
+game_keywords = ["GTA", "Grand Theft Auto"]
+# Downloaded and recorded sources go to the Trash this many days after clipping. Your own local files never do.
+source_trash_days = 7
+
+[chat]
+# Chat is saved this many messages at a time.
+batch = 200
+# Live chat is also saved this often, so each piece is searched with the latest chat.
+live_flush_seconds = 10
+# Tries before giving up on a chat that won't load. The other signals still find moments without it.
+max_attempts = 3
+
+[detect]
+# Signals are measured in bins this long, compared with the stream's own level over the last baseline_seconds
+# (so a loud game or a quiet streamer is judged against itself), then smoothed and added up with these weights.
+bin_seconds = 0.5
+baseline_seconds = 120
+smooth_seconds = 3
+z_cap = 4
+# Loudness and voice take the loudest moment in this span before smoothing, so a short shout counts in full.
+peak_seconds = 1
+# Anything quieter than this is silence.
+silence_db = -60
+# Upper voice band, where shouting and laughing put their energy.
+voice_band_hz = [1000, 4000]
+scene_threshold = 0.35
+scene_fps = 4
+# Chat reacts after the moment: its signal is moved this much earlier.
+chat_lag_seconds = 6
+# Moments at least this far apart, at most this many per hour of stream, above this combined score.
+min_gap_seconds = 45
+per_hour = 12
+min_score = 1.0
+# How much of the stream around a moment Claude reads, before and after its peak.
+context_before = 45
+context_after = 30
+
+[detect.weights]
+loudness = 1.0
+voice = 1.0
+scene = 0.4
+speech_rate = 0.5
+cues = 1.2
+chat = 1.5
+emotes = 1.0
+
+[detect.cues]
+# Phrases streamers say at a moment worth clipping, and how much each counts.
+"clip that" = 3
+"clip it" = 3
+"no way" = 1.5
+"oh my god" = 1.5
+"what the" = 1
+"let's go" = 1.5
+"bro" = 0.5
+"yo" = 0.5
+"insane" = 1
+"crazy" = 1
+"holy" = 1
+"run" = 0.5
+"cops" = 0.5
+"dude" = 0.5
+"chat" = 0.3
+"wait" = 0.5
+"stop" = 0.5
+
+[detect.emotes]
+# Chat reactions that mark a moment.
+words = ["KEKW", "LUL", "LULW", "OMEGALUL", "LMAO", "LOL", "W", "WW", "L", "Pog", "PogU", "POGGERS", "Clap", "ICANT", "monkaS", "omg", "😂", "💀", "🔥"]
+
+[judge]
+# Claude reads the stream around each moment and decides which make clips. Sonnet costs about
+# 4 cents per 6 moments; Haiku (claude-haiku-5-5) about a fifth of a cent, but judges less well.
+model = "claude-sonnet-5-5"
+per_call = 6
+max_tokens = 8000
+# Frames Claude sees per moment, spread from this many seconds before the peak to this many after, at this width.
+# A 512-wide frame is about 200 tokens: 4 frames add under a cent per call with Sonnet.
+frames = 4
+frame_span = [-12, 8]
+frame_width = 512
+tokens_per_frame = 260
+# How the final rank weighs Claude's judgement (0-10) against the signals' score.
+claude_weight = 0.75
+signal_weight = 0.25
+channel = "GTA 6 Clip Central"
+# Moments that aren't GTA are never picked. `--any-game` on the command line lifts it for a test run.
+require_gta = true
+
+[clips]
+min_seconds = 15
+max_seconds = 60
+# Cuts land just before the first word and just after the last.
+lead_seconds = 0.15
+tail_seconds = 0.4
+# An end is moved to the end of its sentence when that's this close.
+sentence_reach_seconds = 3
+
+[facecam]
+# Claude finds the streamer's camera once per source from a few frames, then code snaps the box onto the camera's
+# border: the edge that stays put while the gameplay around it moves.
+claude_frames = 3
+frame_width = 960
+snap_frames = 12
+snap_reach = 0.05        # how far, as a share of the frame, a side may move to reach the border
+snap_strength = 2.0      # a border must be this many times sharper than its surroundings to be trusted
+edge_margin = 0.02       # a side this close to the frame's edge is the edge
+
+[edit]
+width = 1080
+height = 1920
+fps = 60
+crf = 20
+preset = "fast"
+lufs = -14
+true_peak = -1.5
+# Facecam on top, at most this share of the height; gameplay below, cropped around this point across the frame.
+max_cam_share = 0.4
+# When filling that space would cut away more than this share of the overlay, it's fitted whole over a blur instead.
+max_cam_trim = 0.15
+gameplay_center_x = 0.5
+# Without a facecam, the gameplay sits in the middle over a blurred copy of itself.
+blur = 30
+
+[captions]
+# Up to this many words at a time; the word being said is yellow and pops in a little larger.
+max_words = 3
+size = 0.085             # share of the width
+y = 0.80                 # share of the height: below GTA's mid-screen banners (WASTED, MISSION FAILED), above its subtitles
+pop_scale = 1.18
+pop_frames = 3
+credit_size = 0.03
+# Shown with their middle letters starred, so captions don't cost reach. The audio is untouched.
+censor = ["fuck", "fucking", "fucked", "shit", "bitch", "nigga", "niggas", "dick", "pussy", "ass", "asshole", "damn"]
+
+[budget]
+monthly_usd = 25
+
+[transcribe]
+# base.en is already on disk (models/whisper). small.en is more accurate and about 3x slower.
+model = "base.en"
+compute_type = "int8"
+beam_size = 1
+language = "en"
+# Skips music and silence, which streams have a lot of.
+vad = true

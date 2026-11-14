@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "script",
+  "type": "object",
+  "properties": {
+    "format": {
+      "enum": [
+        "long",
+        "short"
+      ]
+    },
+    "target_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "beats": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "narration": {
+            "type": "string",
+            "minLength": 1
+          },
+          "on_screen_text": {
+            "type": "string"
+          },
+          "visual_intent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retention_purpose": {
+            "enum": [
+              "hook",
+              "loop_opened",
+              "loop_closed",
+              "pattern_interrupt",
+              "payoff",
+              "context",
+              "bridge"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "est_seconds": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "narration",
+          "on_screen_text",
+          "visual_intent",
+          "retention_purpose",
+          "source_ref",
+          "est_seconds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "originality_statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "self_check": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule",
+          "passed",
+          "note"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "format",
+    "target_seconds",
+    "beats",
+    "originality_statement",
+    "self_check"
+  ],
+  "additionalProperties": false
+}

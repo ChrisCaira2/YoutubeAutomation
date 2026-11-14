@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "qa_report",
+  "type": "object",
+  "properties": {
+    "gate": {
+      "enum": [
+        "script",
+        "video"
+      ]
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "passed",
+          "note"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fixes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "gate",
+    "passed",
+    "checks",
+    "fixes"
+  ],
+  "additionalProperties": false
+}

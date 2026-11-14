@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+data/
+media/
+.DS_Store
+hub/dist/
+models/
+.venv-image/
+*.log
+# finished videos are outputs, not source (and too big for GitHub)
+assets/**/*.mp4
+.claude/settings.local.json

@@ -1,0 +1,19 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+jsonschema==4.23.0
+pytest==8.3.4
+httpx==0.28.1
+anthropic==2.3.0
+kokoro-onnx==0.6.1
+faster-whisper==1.2.1
+pillow==13.0.0
+soundfile==0.14.0
+# The GTA clipper wing (backend/clipper), approved 2026-11-12
+yt-dlp==2026.10.26
+streamlink==8.6.3
+chat-downloader==0.2.8
+librosa==1.0.1
+scenedetect==0.7.3
+opencv-python-headless==5.0.0.93
+google-api-python-client==2.202.0
+google-auth-oauthlib==1.5.0

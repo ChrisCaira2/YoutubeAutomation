@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "storyboard",
+  "type": "object",
+  "properties": {
+    "style_bible": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "beat_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0
+          },
+          "mode": {
+            "enum": [
+              "archive_film",
+              "bars",
+              "big_stat",
+              "chapter",
+              "chart",
+              "columns",
+              "diagram",
+              "dots",
+              "evidence",
+              "host",
+              "illustration",
+              "intro",
+              "item",
+              "line",
+              "photo",
+              "picture",
+              "play",
+              "professor",
+              "quote",
+              "real_photo",
+              "scene",
+              "scoreboard",
+              "scorecard",
+              "share",
+              "statement",
+              "table",
+              "tally",
+              "text_card",
+              "timeline"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "motion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "spec": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "beat_id",
+          "start",
+          "duration",
+          "mode",
+          "prompt",
+          "motion"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "style_bible",
+    "frames"
+  ],
+  "additionalProperties": false
+}

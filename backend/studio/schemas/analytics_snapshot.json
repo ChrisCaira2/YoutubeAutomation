@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "analytics_snapshot",
+  "type": "object",
+  "properties": {
+    "retention_30s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "avg_percent_viewed": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ctr": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "viewed_vs_swiped": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "retention_30s",
+    "avg_percent_viewed",
+    "ctr",
+    "viewed_vs_swiped",
+    "notes"
+  ],
+  "additionalProperties": false
+}

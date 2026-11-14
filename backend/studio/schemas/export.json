@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "export",
+  "type": "object",
+  "properties": {
+    "folder": {
+      "type": "string",
+      "minLength": 1
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "folder",
+    "files"
+  ],
+  "additionalProperties": false
+}

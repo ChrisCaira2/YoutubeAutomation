@@ -1,0 +1,257 @@
+[
+  {
+    "id": "wilt-100",
+    "file": "wilt-100-1962.jpg",
+    "caption": "Wilt Chamberlain in the Hershey dressing room, March 2, 1962",
+    "credit": "Photo: Paul Vathis / AP, via Wikimedia Commons. Public domain.",
+    "author": "Paul Vathis",
+    "license": "Public domain (per Wikimedia Commons: published before 1964, copyright not renewed)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Wilt_Chamberlain_100_Point_Game_1962.jpg",
+    "rights_note": "Rests on a Commons volunteer's analysis, not a legal ruling; AP could dispute it. Use this cropped version only: Commons warns the uncropped picture may still be AP's. Approved by the channel owner 2026-11-02.",
+    "topics": [
+      "wilt chamberlain 100"
+    ],
+    "match": [
+      "You've seen the picture",
+      "Which brings us back to that picture",
+      "piece of paper and had Chamberlain",
+      "of paper and had Chamberlain"
+    ],
+    "max_uses": 3
+  },
+  {
+    "id": "wilt-1959",
+    "file": "wilt-1959-loc.jpg",
+    "caption": "Wilt Chamberlain, 1959",
+    "credit": "Photo: Fred Palumbo, New York World-Telegram & Sun. Library of Congress.",
+    "author": "Fred Palumbo",
+    "license": "Public domain (Library of Congress: no copyright restriction known)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Wilt_Chamberlain2.jpg",
+    "rights_note": "Library of Congress, New York World-Telegram & Sun Collection; staff photographer rights transferred by gift. A colorized edit by a Commons editor of the original.",
+    "topics": [
+      "wilt chamberlain"
+    ],
+    "match": [
+      "Chamberlain already owned the NBA"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "hershey-arena",
+    "file": "hershey-arena-2002.jpg",
+    "caption": "The arena's main gate, seen in 2002",
+    "credit": "Photo: Bruce C. Cooper, CC BY 3.0, via Wikimedia Commons.",
+    "author": "Bruce C. Cooper",
+    "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:HersheyPark_Arena_main_gate_April,_2002.jpg",
+    "rights_note": "Attribution required. Shows the arena decades after the game, so the caption says when it was taken.",
+    "topics": [
+      "wilt chamberlain 100"
+    ],
+    "match": [
+      "Hershey Sports Arena, in Hershey"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "hershey-marker",
+    "file": "hershey-marker.jpg",
+    "caption": "Pennsylvania's historical marker for the game",
+    "credit": "Photo: Crazycat8590, CC0, via Wikimedia Commons.",
+    "author": "Crazycat8590",
+    "license": "CC0 (https://creativecommons.org/publicdomain/zero/1.0/)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Placard_for_wilt_chamberlains_100_point_game.jpg",
+    "rights_note": "Dedicated to the public domain by the uploader.",
+    "topics": [
+      "wilt chamberlain 100"
+    ],
+    "match": [
+      "Why does it still matter"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "ruth-gehrig-1927",
+    "file": "ruth-gehrig-west-point-1927.jpg",
+    "caption": "Ruth and Gehrig at West Point, May 1927",
+    "credit": "Photo: U.S. Military Academy, 1927. U.S. National Archives.",
+    "author": "U.S. Military Academy",
+    "license": "Public domain (per Wikimedia Commons; U.S. National Archives)",
+    "rights_note": "Dated May 6, 1927. Published before 1931.",
+    "match": [
+      "the idea that Lou Gehrig",
+      "TIME credited Ruth's record"
+    ],
+    "max_uses": 2,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Babe_Ruth_%26_Lou_Gehrig_at_West_Point_1927.jpg",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "ruth-at-bat-1920",
+    "file": "ruth-at-bat-1920.jpg",
+    "caption": "Ruth at bat in 1920, not from this game",
+    "credit": "Photo: National Photo Company, 1920. Library of Congress.",
+    "author": "National Photo Company",
+    "license": "Public domain (per Wikimedia Commons; Library of Congress, National Photo Company Collection)",
+    "rights_note": "LCCN 2016828362. Dated 1920.",
+    "match": [
+      "this time Ruth singles",
+      "Another Ruth single"
+    ],
+    "max_uses": 2,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Babe_Ruth_at_bat,_Garret_catching_LCCN2016828362.jpg",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "ruth-1921",
+    "file": "ruth-1921.jpg",
+    "caption": "Ruth in 1921, the year he hit 59",
+    "credit": "Photo: George Grantham Bain, 1921. Library of Congress.",
+    "author": "George Grantham Bain",
+    "license": "Public domain (per Wikimedia Commons; Library of Congress)",
+    "rights_note": "Dated 1921.",
+    "match": [
+      "59 in 1921"
+    ],
+    "max_uses": 1,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ruth1921.jpg",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "ruth-portrait-1920",
+    "file": "ruth-portrait-1920.jpg",
+    "caption": "Ruth in 1920",
+    "credit": "Photo: Irwin, La Broad & Pudlin, 1920. Library of Congress.",
+    "author": "Irwin, La Broad & Pudlin",
+    "license": "Public domain (per Wikimedia Commons; registered 1920, Library of Congress cph.3g07246)",
+    "rights_note": "Copyright registered August 3, 1920, so published before 1931.",
+    "match": [
+      "the most dangerous hitter alive"
+    ],
+    "max_uses": 1,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Babe_Ruth2.jpg",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "yankee-stadium-1923",
+    "file": "yankee-stadium-1923.jpg",
+    "caption": "Fans lined up at Yankee Stadium, October 1923",
+    "credit": "Photo: Bain News Service, 1923. Library of Congress.",
+    "author": "Bain News Service",
+    "license": "Public domain (per Wikimedia Commons; Library of Congress LC-DIG-ggbain-36450)",
+    "rights_note": "Dated October 10, 1923.",
+    "match": [
+      "as cavernous as Yankee Stadium"
+    ],
+    "max_uses": 1,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Yankee_Stadium_1923_World_Series.jpg",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "yankee-stadium-diagram-1923",
+    "file": "yankee-stadium-diagram-1923.png",
+    "caption": "Yankee Stadium's seating chart, 1923",
+    "credit": "Official Diagram Book, Ridgefield Press, 1923.",
+    "author": "Ridgefield Press",
+    "license": "Public domain (per Wikimedia Commons; published 1923)",
+    "rights_note": "Official diagram book of theatres, athletic fields and baseball parks, 1923.",
+    "match": [
+      "Ruth lifted it into the right-field stands"
+    ],
+    "max_uses": 1,
+    "source_url": "https://commons.wikimedia.org/wiki/File:Yankee_Stadium_diagram_1923.png",
+    "topics": [
+      "babe ruth"
+    ]
+  },
+  {
+    "id": "commons-7930471",
+    "file": "commons-7930471.jpg",
+    "caption": "David Ortiz (2009)",
+    "credit": "Photo: User Parkerjh on en.wikipedia, via Wikimedia Commons. CC BY 3.0.",
+    "author": "User Parkerjh on en.wikipedia",
+    "license": "CC BY 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:DavidOrtiz.JPG",
+    "topics": [
+      "the red sox come back from 0 3 against the yankees"
+    ],
+    "match": [
+      "Ortiz"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "commons-101653706",
+    "file": "commons-101653706.jpg",
+    "caption": "Dave Roberts (2007)",
+    "credit": "Photo: Derral Chen from Los Angeles, U.S.A, via Wikimedia Commons. CC BY-SA 2.0.",
+    "author": "Derral Chen from Los Angeles, U.S.A",
+    "license": "CC BY-SA 2.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Dave_Roberts_(1463905475).jpg",
+    "topics": [
+      "the red sox come back from 0 3 against the yankees"
+    ],
+    "match": [
+      "Roberts"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "commons-80589523",
+    "file": "commons-80589523.jpg",
+    "caption": "Mariano Rivera (2019)",
+    "credit": "Photo: Delta News Hub, via Wikimedia Commons. CC BY 2.0.",
+    "author": "Delta News Hub",
+    "license": "CC BY 2.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Mariano_Rivera_Delta_gate_dedication_(48323109142).jpg",
+    "topics": [
+      "the red sox come back from 0 3 against the yankees"
+    ],
+    "match": [
+      "Rivera"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "commons-4440327",
+    "file": "commons-4440327.jpg",
+    "caption": "Jason Varitek (2008)",
+    "credit": "Photo: PhreddieH3 on en.wikipedia, via Wikimedia Commons. Public domain.",
+    "author": "PhreddieH3 on en.wikipedia",
+    "license": "Public domain",
+    "source_url": "https://commons.wikimedia.org/wiki/File:JasonVaritek.jpg",
+    "topics": [
+      "the red sox come back from 0 3 against the yankees"
+    ],
+    "match": [
+      "Varitek"
+    ],
+    "max_uses": 1
+  },
+  {
+    "id": "commons-2829023",
+    "file": "commons-2829023.jpg",
+    "caption": "Johnny Damon at the plate (2007)",
+    "credit": "Photo: Googie man on en.wikipedia, via Wikimedia Commons. CC BY-SA 3.0.",
+    "author": "Googie man on en.wikipedia",
+    "license": "CC BY-SA 3.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:JohnnyDamon1.jpg",
+    "topics": [
+      "the red sox come back from 0 3 against the yankees"
+    ],
+    "match": [
+      "Damon"
+    ],
+    "max_uses": 1
+  }
+]
