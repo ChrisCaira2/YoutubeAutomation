@@ -1,76 +1,121 @@
-# AI YouTube Studio — The Athletics Archive
+# YouTube Automation
 
-A local multi-agent system that researches, writes and produces faceless videos about big moments in sports history (long-form and Shorts), hosted by the illustrated Professor Sportington III, with a live Agent Hub dashboard. Videos are saved as MP4 files for manual upload; YouTube upload automation comes later.
+I built this to run three faceless YouTube channels from my Mac. Each one has its own section of a single dashboard (I call it the hub):
 
-## Status
+| Wing | Channel | What it makes | Address |
+|---|---|---|---|
+| **The Athletics Archive** | Big moments in sports history, hosted by an illustrated character, Professor Sportington III | Long-form videos and Shorts | http://127.0.0.1:8000 |
+| **Game Day Brain** | The science and psychology of sports, as numbered lists with sketch-style pictures | Long-form videos and Shorts | http://127.0.0.1:8001 |
+| **GTA 6 Clip Central** | Highlights cut from GTA 6 streams | Vertical Shorts and TikToks | http://127.0.0.1:8002 |
 
-- **Phase 0, Strategy** — approved 2026-10-26
-- **Phase 1, Skeleton and hub (mock mode)** — built; awaiting your feedback
-- Phase 2, real Research and Script agents — built; first full script not yet produced
-- **Phase 3, Studio** — built and tested on recovered script beats; first full video not yet produced
-- Phase 4, Packaging — built: titles, drawn thumbnails, description, chapters. You upload by hand
+Everything runs locally. Claude does the thinking: research, scripts, reviews, titles, and picking which stream moments are worth a clip. The voice, captions, pictures and editing all run on the Mac for free. Nothing uploads by itself: every video ends up as an MP4 that I check and upload by hand.
 
-## Run it
+## Quick start
+
+You need macOS on Apple Silicon, Python 3.12, Node 18 or newer, and ffmpeg (`brew install ffmpeg`).
 
 ```bash
-./run.sh        # builds the hub and serves it at http://127.0.0.1:8000
-./run.sh dev    # hot-reloading hub at http://127.0.0.1:5173 (for UI work)
-./run.sh live   # real agents; Claude calls cost money, video production is free
-./run.sh test   # backend tests
+cp .env.example .env    # then add your ANTHROPIC_API_KEY (only needed for live mode)
+./run.sh                # mock mode: every agent runs on fake data, costs nothing
 ```
 
-Mock mode runs every agent with fake providers at $0. The costs it shows are the forecast of a real run (`backend/studio/forecast.py`, built from real logged runs), never charged. Update that file when a real run measures something new. `STUDIO_MOCK_SPEED=3 ./run.sh` speeds the agents up. Delete `data/` to start over with an empty studio.
+On first run, `run.sh` creates `.venv`, installs `backend/requirements.txt`, builds the hub and serves all three wings. Open http://127.0.0.1:8000 and use the switch at the top of the page to move between them.
 
-## Layout
-
-| Path | What it holds |
+| Command | What it does |
 |---|---|
-| `strategy/` | Channel Strategy, the professor persona, 30-topic backlog (the backlog is loaded into the database on start) |
-| `playbook/playbook.json` | Seed virality and policy knowledge base, read by every agent |
-| `backend/studio/pipeline.py` | Job stages, which agent works each one, legal moves |
-| `backend/studio/showrunner.py` | Orchestrator: routing, QA send-backs, approvals, budget guard |
-| `backend/studio/agents/` | Agent base class and the mock agents |
-| `backend/studio/schemas/` | JSON schema for every handoff artifact, validated on write |
-| `backend/studio/api.py` | REST API and the live event stream for the hub |
-| `hub/` | The Agent Hub (React + Vite) |
-| `data/` | SQLite database (git-ignored) |
-| `media/` | Per-job media folders (git-ignored) |
+| `./run.sh` | All three wings in **mock mode**. A good way to see how the studio flows without spending anything. |
+| `./run.sh live` | Real Claude agents. This spends money, within the budgets set in `.env`. |
+| `./run.sh dev` | The Archive with a hot-reloading hub at http://127.0.0.1:5173, for UI work |
+| `./run.sh test` | The backend test suite (pytest) |
+| `./run.sh clip --help` | The GTA clipper's command line |
 
-## Producing video (free, local)
+Mock mode shows the cost a real run would have (forecast from real logged runs in `backend/studio/forecast.py`) but never charges anything. To start over with an empty studio, delete `data/`.
 
-`backend/studio/media/` turns an approved script into an MP4. Code times the frames, Haiku designs each slide (about $0.015 per long-form video), and code rejects any slide showing a number that isn't in the script or sourced facts. Pillow draws the slides (`slides.py`), Kokoro speaks, Whisper times captions, and FFmpeg assembles. QA-2 measures the file (resolution, loudness, caption coverage, frame cadence). A preview renders first; the hub's "Render final video" button makes the full-resolution file.
+### Models (not in git)
 
-Setup not in git: `models/kokoro/kokoro-v1.0.onnx` and `voices-v1.0.bin` from the thewh1teagle/kokoro-onnx release `model-files-v1.0`; Whisper downloads itself into `models/whisper/`.
+They're too big for GitHub, so they're downloaded separately into `models/`:
 
-Not done yet: the image model (illustration and photo frames are drawn stand-ins) and music. To add music, put a licensed track in `assets/music/` and list it in `assets/music/manifest.json` as `[{"file": "...", "source": "...", "license": "..."}]`.
+- **Narration:** `models/kokoro/kokoro-v1.0.onnx` and `voices-v1.0.bin` from the [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) release `model-files-v1.0`.
+- **Captions:** Whisper downloads itself into `models/whisper/` the first time it's needed.
+- **Pictures (Game Day Brain):** a 4-bit save of FLUX.1-schnell in `models/flux-schnell-4bit/`. It runs in a separate Python environment, `.venv-image` with [mflux](https://github.com/filipstrand/mflux), so it can't clash with the narrator's packages.
 
-Try it free on saved beats: `cd backend && ../.venv/bin/python render_test.py --beats 8` (or `--format short`, `--voice am_adam`).
+The hub's System panel shows which models it can find.
 
-Preview slides from the saved Wilt beats: `cd backend && STUDIO_MODE=live ../.venv/bin/python slides_preview.py` calls Haiku; add `--reuse` to redraw from its last saved answer for free, or `--dry` to count tokens free.
+## How a video gets made (the two studios)
 
-## How it fits together
+The Archive and Game Day Brain run on the same code (`backend/studio/`). They're two **workspaces**, each with its own channel, database, topics and playbook. A video is a **job** that moves through these stages:
 
-- **Shared state**: SQLite (`data/studio.db`) with topics, jobs, versioned artifacts, an append-only event log and settings. Plain SQL, so moving to Postgres is a driver swap.
-- **Handoffs**: an agent saves its artifact; the Showrunner validates it, moves the job's stage, and the next agent picks it up. Agents never call each other.
-- **Artifacts**: one versioned `artifacts` table keyed by kind instead of a table per kind (a change from the brief). Each kind still has its own JSON schema, and adding a kind means adding a schema file, not a migration.
-- **Resumable**: a job's stage is its last completed milestone, so after a crash or restart every job resumes from there. A file lock stops two servers from driving the same database.
-- **Live hub**: every action is an event, and the hub receives events through server-sent events, with no polling and no refresh.
-- **Gates**: QA can send work back (3 strikes blocks the job); you approve the first N videos (setting), then the Showrunner auto-approves; the budget guard pauses the studio at the daily limit and blocks a job at the per-video limit.
+```
+idea → researched → scripted → QA-1 → storyboarded → rendered → QA-2 → packaged → awaiting approval → approved → exported
+```
 
-## Stack (local, macOS)
+- An **agent** works each stage: Research, Script, QA, Studio, Packaging and Publisher. Agents never call each other. Each one saves an **artifact** (a brief, script, storyboard, render or package). The **Showrunner** (`showrunner.py`) checks that artifact against its JSON schema and moves the job on.
+- **QA can send work back.** A script that fails QA-1 returns to the Script agent. A render that fails QA-2 returns to the storyboard. After three strikes the job is blocked until I look at it.
+- **I approve the first videos**, and the Showrunner can auto-approve after that (a setting). A budget guard pauses the studio at the daily limit and blocks any job that goes over the per-video limit.
+- **Jobs can resume.** A job's stage is its last finished step, so after a crash or restart every job carries on from there.
+- **The hub is live.** Every action is logged as an event and streamed to the hub over server-sent events, so it updates without refreshing.
 
-| Part | Tool |
+### Producing the video
+
+`backend/studio/media/` turns an approved script into an MP4:
+
+1. Code times each frame to the narration. Claude Haiku designs the on-screen slides, and code rejects any slide showing a number that isn't in the script or the sourced facts.
+2. Pillow draws the slides, Kokoro speaks the script, Whisper times the captions word by word, and FFmpeg puts it all together.
+3. QA-2 measures the finished file: resolution, loudness, caption coverage and frame timing.
+
+A quick preview renders first. The hub's **Render final video** button makes the full-resolution file.
+
+To try it for free on saved beats:
+
+```bash
+cd backend && ../.venv/bin/python render_test.py --beats 8      # add --format short or --voice am_adam
+```
+
+## GTA 6 Clip Central
+
+The clipper lives in `backend/clipper/` and is separate from the studios. It has its own database (`data/clips.db`), media folder (`media/clips/`) and settings file ([`config.toml`](backend/clipper/config.toml)). It turns long streams into vertical clips:
+
+1. **Ingest:** Twitch, YouTube and Kick VODs (yt-dlp) or live streams (streamlink, in 5-minute pieces), plus chat where it's available.
+2. **Transcribe:** faster-whisper, with word-level times.
+3. **Detect:** free signals score every half second: loudness, raised voices, scene cuts, how fast the streamer is talking, hype phrases, and how fast chat is moving.
+4. **Judge:** Claude looks at the top moments (transcript plus 4 frames each), picks the real highlights and writes a title, caption and hashtags. It stays under a $25 monthly cap.
+5. **Edit:** a 1080x1920 clip with the facecam stacked over the gameplay, word-pop captions, a credit to the streamer, and −14 LUFS loudness.
+6. **Review:** in the hub I approve, reject, trim or fix the facecam box. Source videos go to the Trash a week after their last clip.
+
+Live streams are clipped as they record: a clip is ready about 5 to 7 minutes after the moment happens. [`backend/clipper/README.md`](backend/clipper/README.md) covers the command line and the editing details.
+
+## Where things are
+
+| Path | What's there |
 |---|---|
-| Agent reasoning | Claude API (Phase 2) |
-| Narration | Kokoro TTS (Phase 3) |
-| Images | FLUX.1-schnell via mflux; public-domain and Creative Commons photos (Phase 3) |
-| Captions | whisper.cpp / faster-whisper (Phase 3) |
-| Music | YouTube Audio Library, Pixabay Music (Phase 3) |
-| Assembly | FFmpeg (Phase 3) |
-| Hub | FastAPI + React + SQLite |
+| `run.sh` | The one command that runs everything |
+| `backend/studio/` | The two studios: pipeline, Showrunner, agents, API and config |
+| `backend/studio/pipeline.py` | The job stages, which agent works each one, and the allowed moves between them |
+| `backend/studio/agents/` | The agents: `live.py` calls Claude, `mock.py` fakes it for free |
+| `backend/studio/media/` | Everything that makes video: slides, voice, captions, pictures, assembly, QA-2 |
+| `backend/studio/schemas/` | One JSON schema per artifact kind, checked on every save |
+| `backend/clipper/` | GTA 6 Clip Central, from ingest through review |
+| `backend/tests/` | The test suite, with small fixtures (including a 22-second sample stream) |
+| `hub/` | The dashboard, React + Vite. `hub/src/views/ClipCentral.jsx` is the clipper's screen |
+| `strategy/` | The Archive's channel strategy, host persona and topic backlog |
+| `workspaces/slop/` | The same for Game Day Brain (the folder kept its old name) |
+| `playbook/playbook.json` | What the agents know about virality and YouTube policy |
+| `assets/` | Channel art, thumbnails and the public-domain and Creative Commons photos |
+| `data/`, `media/`, `models/` | The databases, rendered media and models. All git-ignored |
 
-Secrets live in a git-ignored `.env`; copy `.env.example` to start.
+## A few design choices
+
+- **SQLite with plain SQL** for all shared state. Moving to Postgres would just mean swapping the driver.
+- **One versioned `artifacts` table** instead of a table per kind. Adding a new kind of artifact means adding a schema file, not a migration.
+- **A file lock** stops two servers from driving the same database.
+- **Every stage can run again.** The clipper's stages pass work along through the database and files, so any one of them can be re-run or swapped without touching the rest.
+
+## Secrets and spending
+
+- API keys live only in `.env`, which is git-ignored. Copy `.env.example` to start.
+- `DAILY_BUDGET_USD` and `PER_VIDEO_BUDGET_USD` cap the studios. The clipper's cap is `[budget] monthly_usd` in `backend/clipper/config.toml`.
+- Mock mode costs nothing, so use it when trying things out. `slides_preview.py --dry` counts tokens without calling Claude.
 
 ## Credits
 
-The Agent Hub's front-office characters use the [“Personas”](https://personas.draftbit.com/) avatar style by Draftbit, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), generated locally with [DiceBear](https://www.dicebear.com/) (MIT). The hub shows this credit under the office scene.
+The hub's front-office characters use the [“Personas”](https://personas.draftbit.com/) avatar style by Draftbit, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), generated locally with [DiceBear](https://www.dicebear.com/) (MIT). Photos in `assets/photos/` come from Wikimedia Commons and other public-domain or Creative Commons sources, listed in `assets/photos/manifest.json`.
